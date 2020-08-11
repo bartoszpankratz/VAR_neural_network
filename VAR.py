@@ -44,5 +44,5 @@ class VaR:
                   for i in range(look_back, len(y))] for a in alpha]
         for i,name in enumerate(var_titles):
             self.vars[name] = ""
-            self.vars.loc[self.vars.index[look_back:len(y)], name] = y_hat[i]   
+            self.vars.loc[self.vars.index[look_back:len(y)], name] = y_hat[i]
        
