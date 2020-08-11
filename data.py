@@ -19,7 +19,7 @@ class Data:
 
 def Gaussian_Noise(process,iters):
 #GWS
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     y = np.random.normal(0, 1, size= iters)
     true_var = np.repeat([sps.norm.ppf(0.01)], iters)
     data = pd.DataFrame(data = {'Returns' : y, 'True_VAR_0.01' : true_var})
@@ -30,7 +30,7 @@ def get_AR(process, iters, params):
     if params == None:          
         params = {'AR': [-0.999]}
         
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     metadata.update(params)
     
     ar = np.array([1] + params['AR'])
@@ -47,7 +47,7 @@ def get_ARCH(process,iters,params):
     if params == None:          
         params = {'INIT': [0, 0.1], 'P_PARAMS': [0.2, 0.1]}
         
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     metadata.update(params)
     
     model = arch_model(None, p = len(params['P_PARAMS']), o = 0, q = 0)
@@ -64,7 +64,7 @@ def get_GARCH(process,iters,params):
     if params == None:          
         params = {'INIT': [0, 0.1], 'P_PARAMS': [0.2, 0.1], 'Q_PARAMS': [0.2, 0.1]}
         
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     metadata.update(params)
     
     model = arch_model(None, p = len(params['P_PARAMS']), o = 0, q = len(params['Q_PARAMS']))
@@ -82,7 +82,7 @@ def get_GJR_GARCH(process,iters,params):
         params = {'INIT': [0, 0.1], 'P_PARAMS': [0.2, 0.1], 
                   'O_PARAMS': [0.5], 'Q_PARAMS': [0.2, 0.1]}
         
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     metadata.update(params)
     
     model = arch_model(None, p = len(params['P_PARAMS']),
@@ -101,7 +101,7 @@ def get_EGARCH(process,iters,params):
     if params == None:          
         params =  {'INIT': [0, 0.1], 'P_PARAMS': [0.4, 0.1], 'Q_PARAMS': [0.7, 0.1]}
         
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     metadata.update(params)
     
     model = EGARCH(p = len(params['P_PARAMS']), q = len(params['Q_PARAMS']))
@@ -118,7 +118,7 @@ def get_HARCH(process,iters,params):
     if params == None:          
         params =  {'LAGS': [1, 5, 17], 'INIT': [1], 'PARAMS': [0.2, 0.05, 0.01]}
         
-    metadata ={"process":process,"number_of_iterations":iters}
+    metadata ={"NAME":process,"number_of_iterations":iters}
     metadata.update(params)
     
     model = HARCH(lags = params['LAGS'])
