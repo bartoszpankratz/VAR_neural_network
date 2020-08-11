@@ -153,10 +153,10 @@ def sim_data(process, iters = 1000, params = None):
 #function for extracting data from zipfile
 def get_data(zip, dict, file = None):
     try:
-        df = pd.read_csv(zf.open(dict))
+        df = pd.read_csv(zip.open(dict))
         if file != None:
             try:
-                dt = pd.read_csv(zf.open(file))
+                dt = pd.read_csv(zip.open(file))
                 ticker = [ticker for ticker in df["TICKER"] if ticker in file.upper()][0]
                 row = df[df["TICKER"] == ticker].iloc[:,0:5]
                 metadata = {col:row[col].values[0] for col in row.columns}
@@ -171,6 +171,6 @@ def get_data(zip, dict, file = None):
             except:
                 print(f" {file} - no such file in directory!")
         else:
-            return [get_data(zip,dict,name) for name in zf.namelist() if name != dict]
+            return [get_data(zip,dict,name) for name in zip.namelist() if name != dict]
     except:
         print(f" {dict} - no such file in directory!")
