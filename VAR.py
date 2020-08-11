@@ -12,7 +12,6 @@ import numpy as np
         #    'Bernoulli'      : [],
         #    'Christoffersen' : []
         #}
-		
 class VaR:
     def __init__(self, data, methods, alpha, look_back):
         self.name  = data.metadata["NAME"] + "_" + "VAR"
@@ -47,5 +46,3 @@ class VaR:
             self.vars[name] = ""
             self.vars.loc[self.vars.index[look_back:len(y)], name] = y_hat[i]   
        
-
-    
